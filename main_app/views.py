@@ -14,3 +14,7 @@ def about(request):
 def courses_index(request):
   courses = Course.objects.all()
   return render(request, 'courses/index.html', { 'courses': courses })
+
+def courses_detail(request, course_id):
+  course = Course.objects.get(id=course_id)
+  return render(request, 'courses/detail.html', { 'course': course })
