@@ -29,3 +29,17 @@ class Course(models.Model):
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'course_id': self.id})
+
+class Lesson(models.Model):
+    title = models.CharField(max_length=100)
+    unit = models.IntegerField()
+    description = models.TextField(max_length=250)
+
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['unit']
+
+    def __str__(self):
+        return f"Unit {self.unit}: {self.title}"
+    
