@@ -4,4 +4,4 @@ from .models import Lesson
 class LessonForm(ModelForm):
   class Meta:
     model = Lesson
-    fields = '__all__'
+    fields = ['unit', 'title', 'description']

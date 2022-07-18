@@ -8,7 +8,7 @@
         <span class="card-title">{{ course.title }}</span>
         <p>Subject: {{ course.subject }}</p>
         <p>Teacher: {{ course.teacher }}</p>
-        <p>Day: {{ course.get_day_display }}</p>
+        <p>course: {{ course.get_course_display }}</p>
         <p>Time: {{ course.get_time_display }}</p>
         <p>Description: {{ course.description }}</p>
         <p>Prereqs: {{ course.prereq }}</p>
@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class="col s6">
-    <form method="POST">
+    <form action="{% url 'add_lesson' course.id %}" method="POST">
       {% csrf_token %}
       {{ lesson_form.as_p }}
       <input type="submit" class="btn" value="Add Lesson">
