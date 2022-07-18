@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Course Details</h1>
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ course.title }}</span>
+    <p>Subject: {{ course.subject }}</p>
+    <p>Teacher: {{ course.teacher }}</p>
+    <p>Day: {{ course.get_day_display }}</p>
+    <p>Time: {{ course.get_time_display }}</p>
+    <p>Description: {{ course.description }}</p>
+    <p>Prereqs: {{ course.prereq }}</p>
+  </div>
+  <div class="card-action">
+    <a href="{% url 'courses_update' course.id %}">Edit</a>
+    <a href="{% url 'courses_delete' course.id %}">Delete</a>
+  </div>
+</div>
+
+{% endblock %}
