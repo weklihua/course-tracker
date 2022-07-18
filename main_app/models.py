@@ -14,6 +14,31 @@ TIMES = (
     ("3", "12:00-1:30 pm"),
     ("4", "1:30-3:00 pm")
 )
+YEARS = (
+    ("0", "Kindergarten"),
+    ("1", "1st Grade"),
+    ("2", "2nd Grade"),
+    ("3", "3rd Grade"),
+    ("4", "4th Grade"),
+    ("5", "5th Grade"),
+    ("6", "6th Grade"),
+    ("7", "7th Grade"),
+    ("8", "8th Grade"),
+    ("9", "Freshman"),
+    ("10", "Sophomore"),
+    ("11", "Junior"),
+    ("12", "Senior"),
+)
+
+class Student(models.Model):
+  name = models.CharField(max_length=50)
+  year = models.CharField(max_length=2, choices=YEARS, default=YEARS[0][0])
+
+  def __str__(self):
+    return self.name
+
+  def get_absolute_url(self):
+    return reverse('toys_detail', kwargs={'pk': self.id})
 
 class Course(models.Model):
     title = models.CharField(max_length=100)
@@ -23,6 +48,7 @@ class Course(models.Model):
     description = models.TextField(max_length=250)
     teacher = models.CharField(max_length=100)
     prereq = models.CharField(max_length=100)
+    students = models.ManyToManyField(Student)
 
     def __str__(self):
         return f"{self.title}"
