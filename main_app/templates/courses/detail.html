@@ -11,6 +11,10 @@
     <p>Description: {{ course.description }}</p>
     <p>Prereqs: {{ course.prereq }}</p>
   </div>
+  <div class="card-action">
+    <a href="{% url 'courses_update' course.id %}">Edit</a>
+    <a href="{% url 'courses_delete' course.id %}">Delete</a>
+  </div>
 </div>
 
 {% endblock %}

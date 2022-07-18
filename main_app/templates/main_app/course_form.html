@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if object %}
+<h1>Edit <span class="teal-text">{{object.title}}</span></h1>
+{% else %}
+<h1>Add Course</h1>
+{% endif %}
+  <form action="" method="POST">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit!" class="btn">
+  </form>
+
+
+
+  <script> 
+    const dayEl = document.getElementById('id_day')
+    M.FormSelect.init(dayEl)
+
+    const timeEl = document.getElementById('id_time')
+    M.FormSelect.init(timeEl)
+  </script>
+
+{% endblock %}
+
