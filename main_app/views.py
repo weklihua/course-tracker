@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Course
+from .forms import LessonForm
+
 
 # Create your views here.
 
@@ -18,7 +20,8 @@ def courses_index(request):
 
 def courses_detail(request, course_id):
   course = Course.objects.get(id=course_id)
-  return render(request, 'courses/detail.html', { 'course': course })
+  lesson_form = LessonForm()
+  return render(request, 'courses/detail.html', { 'course': course, 'lesson_form': lesson_form })
 
 class CourseCreate(CreateView):
   model = Course

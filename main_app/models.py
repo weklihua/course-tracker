@@ -37,6 +37,9 @@ class Lesson(models.Model):
 
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
+    class Meta:
+        ordering = ['unit']
+
     def __str__(self):
         return f"Unit {self.unit}: {self.title}"
     
