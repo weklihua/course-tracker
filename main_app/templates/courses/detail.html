@@ -8,7 +8,6 @@
         <span class="card-title">{{ course.title }}</span>
         <p>Subject: {{ course.subject }}</p>
         <p>Teacher: {{ course.teacher }}</p>
-        <p>course: {{ course.get_course_display }}</p>
         <p>Time: {{ course.get_time_display }}</p>
         <p>Description: {{ course.description }}</p>
         <p>Prereqs: {{ course.prereq }}</p>
@@ -52,6 +51,12 @@
               {{ student.name }}
             </span>
           </div>
+          <div class="card-action">
+            <form action="{% url 'unassoc_student' course.id student.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn">Remove</button>
+            </form>
+          </div>
         </div>
       {% endfor %}
     {% else %}
@@ -69,7 +74,7 @@
             </span>
           </div>
           <div class="card-action">
-            <form action="" method="POST">
+            <form action="{% url 'assoc_student' course.id student.id %}" method="POST">
               {% csrf_token %}
               <button type="submit" class="btn">Add</button>
             </form>

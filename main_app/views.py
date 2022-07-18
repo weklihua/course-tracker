@@ -68,11 +68,11 @@ class StudentDelete(DeleteView):
   success_url = '/students/'
 
 def assoc_student(request, course_id, student_id):
-  course = Course.objects.get(id=course_id)
-  course.students.add(student_id)
+  Course.objects.get(id=course_id).students.add(student_id)
   return redirect('detail', course_id=course_id)
 
 def unassoc_student(request, course_id, student_id):
   course = Course.objects.get(id=course_id)
   course.students.remove(student_id)
   return redirect('detail', course_id=course_id)
+ 
