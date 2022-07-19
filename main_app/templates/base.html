@@ -12,7 +12,7 @@
 </head>
 <body>
   <header class="navbar-fixed">
-    <nav>
+    <nav class="teal">
       <div class="nav-wrapper">
         <ul>
           <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Course Tracker</a></li>
@@ -37,8 +37,14 @@
     {% block content %}
     {% endblock %}
   </main>
-  <footer class="page-footer">
+  <footer class="page-footer teal">
     <div class="right">All Rights Reserved, &copy; 2022 Course Tracker &nbsp;</div>
   </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const parallaxEffect = document.querySelectorAll('.parallax');
+      M.Parallax.init(parallaxEffect, {});
+    });
+  </script>
 </body>
 </html>

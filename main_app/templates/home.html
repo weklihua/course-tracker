@@ -2,7 +2,46 @@
 {% block content %}
 
 <h1>Home</h1>
-<hr />
-<p>Course Tracker!</p>
+<hr/>
+<p>Description...</p>
+
+<div class="parallax-container">
+  <div class="parallax">
+    <img src="static/images/education.jpeg" alt="">
+  </div>
+</div>
+
+<br>
+<h5>Explore the <a href="{% url 'index' %}">Courses</a>...</h5>
+<hr/>
+<p>Description...</p>
+<br>
+
+<div class="parallax-container">
+  <div class="parallax">
+    <img src="static/images/knowledge.jpeg" alt="">
+  </div>
+</div>
+
+<br>
+<h5>Our <a href="{% url 'students_index' %}">Students</a>...</h5>
+<hr/>
+<p>Description...</p>
+<div class="parallax-container">
+  <div class="parallax">
+    <img src="static/images/students.webp" alt="">
+  </div>
+</div>
+
+<br>
+<h5>Find out more <a href="{% url 'about' %}">about us</a>...</h5>
+<hr/>
+<p>Description...</p>
+<div class="parallax-container">
+  <div class="parallax">
+    <img src="static/images/aboutus.webp" alt="">
+  </div>
+</div>
 
 {% endblock %}
+
