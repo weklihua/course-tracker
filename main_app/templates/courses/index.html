@@ -2,18 +2,24 @@
 
 <h1>Course List</h1>
 
+<div class="row">
 {% for course in courses %}
+<div class="col s4">
 <div class="card">
   <a href="{% url 'detail' course.id %}">
     <div class="card-content">
       <span class="card-title">{{ course.title }}</span>
-      <p>Subject: {{ course.subject }}</p>
+      <!-- <p>Subject: {{ course.subject }}</p>
       <p>Teacher: {{ course.teacher }}</p>
       <p>Day: {{ course.get_day_display }}</p>
       <p>Time: {{ course.get_time_display }}</p>
       <p>Description: {{ course.description }}</p>
-      <p>Prereqs: {{ course.prereq }}</p>
+      <p>Prereqs: {{ course.prereq }}</p> -->
     </div>
   </a>
 </div>
-{% endfor %} {% endblock %}
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}
