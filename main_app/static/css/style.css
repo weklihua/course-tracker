@@ -30,3 +30,6 @@ body {
 #coursedetail{
   margin-left:15%;
 }
+div.card.teal.lighten-5:hover {
+  box-shadow: 2px 2px rgba(216, 212, 212, 0.603);
+}
