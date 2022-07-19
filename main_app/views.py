@@ -39,7 +39,7 @@ def add_lesson(request, course_id):
 
 class CourseCreate(CreateView):
   model = Course
-  fields = '__all__'
+  fields = ['title', 'subject', 'teacher', 'day', 'time', 'description', 'prereq']
 
 class CourseUpdate(UpdateView):
   model = Course

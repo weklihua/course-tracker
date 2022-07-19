@@ -8,6 +8,7 @@
         <span class="card-title">{{ course.title }}</span>
         <p>Subject: {{ course.subject }}</p>
         <p>Teacher: {{ course.teacher }}</p>
+        <p>Day: {{ course.get_day_display }}</p>
         <p>Time: {{ course.get_time_display }}</p>
         <p>Description: {{ course.description }}</p>
         <p>Prereqs: {{ course.prereq }}</p>
