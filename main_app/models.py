@@ -30,9 +30,15 @@ YEARS = (
     ("12", "Senior"),
 )
 
+LD = (
+    ("n", "No"),
+    ("y", "Yes"),
+)
+
 class Student(models.Model):
   name = models.CharField(max_length=50)
   year = models.CharField(max_length=2, choices=YEARS, default=YEARS[0][0])
+  learning_difference = models.CharField(max_length=2, choices=LD, default=LD[0][0])
 
   def __str__(self):
     return self.name

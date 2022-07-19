@@ -78,7 +78,7 @@ class StudentCreate(LoginRequiredMixin, CreateView):
 
 class StudentUpdate(LoginRequiredMixin, UpdateView):
   model = Student
-  fields = ['name', 'year']
+  fields = ['name', 'year', 'learning_difference']
 
 class StudentDelete(LoginRequiredMixin, DeleteView):
   model = Student

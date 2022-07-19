@@ -9,6 +9,7 @@
       <div class="card-content">
         <span class="card-title">{{ student.name }}</span>
         <p>Grade: {{ student.get_year_display }}</p>
+        <p> Individual Learning Plan? {{student.get_learning_difference_display }}</p>
       </div>
       <div class="card-action">
         <a href="{% url 'students_update' student.id %}">Edit</a>
@@ -17,4 +18,6 @@
     </div>
   </div>
 </div>
+
+
 {% endblock %}
