@@ -59,9 +59,8 @@ class Course(models.Model):
 
 class Lesson(models.Model):
     title = models.CharField(max_length=100)
-    unit = models.IntegerField()
+    unit = models.PositiveIntegerField(default=1)
     description = models.TextField(max_length=250)
-
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     class Meta:
