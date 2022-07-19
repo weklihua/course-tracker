@@ -7,14 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Course Tracker</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <!-- <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.css' %}" media="screen,projection"/> -->
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  
 </head>
 <body>
   <header class="navbar-fixed">
-    <nav class="blue">
+    <nav class="teal">
       <div class="nav-wrapper">
         <ul>
           <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Course Tracker</a></li>
@@ -39,11 +37,9 @@
     {% block content %}
     {% endblock %}
   </main>
-  <footer class="page-footer">
+  <footer class="page-footer teal">
     <div class="right">All Rights Reserved, &copy; 2022 Course Tracker &nbsp;</div>
   </footer>
-  <!-- <script type="text/javascript" src="{% static 'js/materialize.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/init.js' %}"></script> -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const parallaxEffect = document.querySelectorAll('.parallax');
