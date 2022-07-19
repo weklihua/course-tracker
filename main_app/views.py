@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Course
+from django.views.generic.edit import CreateView, UpdateView, DeleteView 
+from django.views.generic import ListView, DetailView
+from .models import Course, Student
 from .forms import LessonForm
 
 
@@ -20,8 +21,10 @@ def courses_index(request):
 
 def courses_detail(request, course_id):
   course = Course.objects.get(id=course_id)
+  id_list = course.students.all().values_list('id')
+  students_not_in_course = Student.objects.exclude(id__in=id_list)
   lesson_form = LessonForm()
-  return render(request, 'courses/detail.html', { 'course': course, 'lesson_form': lesson_form })
+  return render(request, 'courses/detail.html', { 'course': course, 'lesson_form': lesson_form, 'students': students_not_in_course})
 
 def add_lesson(request, course_id):
   form = LessonForm(request.POST)
@@ -36,7 +39,7 @@ def add_lesson(request, course_id):
 
 class CourseCreate(CreateView):
   model = Course
-  fields = '__all__'
+  fields = ['title', 'subject', 'teacher', 'day', 'time', 'description', 'prereq']
 
 class CourseUpdate(UpdateView):
   model = Course
@@ -45,3 +48,31 @@ class CourseUpdate(UpdateView):
 class CourseDelete(DeleteView):
   model = Course
   success_url = '/courses/'
+
+class StudentList(ListView):
+  model = Student
+
+class StudentDetail(DetailView):
+  model = Student
+
+class StudentCreate(CreateView):
+  model = Student
+  fields = '__all__'
+
+class StudentUpdate(UpdateView):
+  model = Student
+  fields = ['name', 'year']
+
+class StudentDelete(DeleteView):
+  model = Student
+  success_url = '/students/'
+
+def assoc_student(request, course_id, student_id):
+  Course.objects.get(id=course_id).students.add(student_id)
+  return redirect('detail', course_id=course_id)
+
+def unassoc_student(request, course_id, student_id):
+  course = Course.objects.get(id=course_id)
+  course.students.remove(student_id)
+  return redirect('detail', course_id=course_id)
+ 
