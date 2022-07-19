@@ -30,9 +30,15 @@ YEARS = (
     ("12", "Senior"),
 )
 
+LD = (
+    ("n", "No"),
+    ("y", "Yes"),
+)
+
 class Student(models.Model):
   name = models.CharField(max_length=50)
   year = models.CharField(max_length=2, choices=YEARS, default=YEARS[0][0])
+  learning_difference = models.CharField(max_length=2, choices=LD, default=LD[0][0])
 
   def __str__(self):
     return self.name
@@ -59,9 +65,8 @@ class Course(models.Model):
 
 class Lesson(models.Model):
     title = models.CharField(max_length=100)
-    unit = models.IntegerField()
+    unit = models.PositiveIntegerField(default=1)
     description = models.TextField(max_length=250)
-
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     class Meta:
