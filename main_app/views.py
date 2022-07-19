@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView 
 from django.views.generic import ListView, DetailView
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
 from .models import Course, Student
 from .forms import LessonForm
 
@@ -41,6 +43,10 @@ class CourseCreate(CreateView):
   model = Course
   fields = ['title', 'subject', 'teacher', 'day', 'time', 'description', 'prereq']
 
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
+
 class CourseUpdate(UpdateView):
   model = Course
   fields = ['subject', 'teacher', 'day', 'time', 'description', 'prereq']
@@ -75,4 +81,18 @@ def unassoc_student(request, course_id, student_id):
   course = Course.objects.get(id=course_id)
   course.students.remove(student_id)
   return redirect('detail', course_id=course_id)
+
+def signup(request):
+  error_message = ''
+  if request.method == 'POST':
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      user = form.save()
+      login(request, user)
+      return redirect('index')
+    else:
+      error_message = 'Invalid sign up - try again'
+  form = UserCreationForm()
+  context = {'form': form, 'error_message': error_message}
+  return render(request, 'registration/signup.html', context)
  
