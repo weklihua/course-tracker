@@ -20,3 +20,13 @@ body {
     max-width: 50%;
     height: auto;
   } */
+
+  /* .card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+#coursedetail{
+  margin-left:15%;
+}
