@@ -3,6 +3,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Course, Student
 from .forms import LessonForm
 
@@ -17,10 +19,12 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+@login_required
 def courses_index(request):
-  courses = Course.objects.all()
+  courses = Course.objects.filter(user=request.user)
   return render(request, 'courses/index.html', { 'courses': courses })
 
+@login_required
 def courses_detail(request, course_id):
   course = Course.objects.get(id=course_id)
   id_list = course.students.all().values_list('id')
@@ -28,6 +32,7 @@ def courses_detail(request, course_id):
   lesson_form = LessonForm()
   return render(request, 'courses/detail.html', { 'course': course, 'lesson_form': lesson_form, 'students': students_not_in_course})
 
+@login_required
 def add_lesson(request, course_id):
   form = LessonForm(request.POST)
   # validate the form
@@ -39,7 +44,8 @@ def add_lesson(request, course_id):
     new_lesson.save()
   return redirect('detail', course_id=course_id)
 
-class CourseCreate(CreateView):
+
+class CourseCreate(LoginRequiredMixin, CreateView):
   model = Course
   fields = ['title', 'subject', 'teacher', 'day', 'time', 'description', 'prereq']
 
@@ -47,36 +53,43 @@ class CourseCreate(CreateView):
     form.instance.user = self.request.user
     return super().form_valid(form)
 
-class CourseUpdate(UpdateView):
+
+class CourseUpdate(LoginRequiredMixin, UpdateView):
   model = Course
   fields = ['subject', 'teacher', 'day', 'time', 'description', 'prereq']
 
-class CourseDelete(DeleteView):
+
+class CourseDelete(LoginRequiredMixin, DeleteView):
   model = Course
   success_url = '/courses/'
 
-class StudentList(ListView):
+
+
+class StudentList(LoginRequiredMixin, ListView):
   model = Student
 
-class StudentDetail(DetailView):
+
+class StudentDetail(LoginRequiredMixin, DetailView):
   model = Student
 
-class StudentCreate(CreateView):
+class StudentCreate(LoginRequiredMixin, CreateView):
   model = Student
   fields = '__all__'
 
-class StudentUpdate(UpdateView):
+class StudentUpdate(LoginRequiredMixin, UpdateView):
   model = Student
   fields = ['name', 'year']
 
-class StudentDelete(DeleteView):
+class StudentDelete(LoginRequiredMixin, DeleteView):
   model = Student
   success_url = '/students/'
 
+@login_required
 def assoc_student(request, course_id, student_id):
   Course.objects.get(id=course_id).students.add(student_id)
   return redirect('detail', course_id=course_id)
 
+@login_required
 def unassoc_student(request, course_id, student_id):
   course = Course.objects.get(id=course_id)
   course.students.remove(student_id)
