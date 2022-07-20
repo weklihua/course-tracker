@@ -7,32 +7,57 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Course Tracker</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
   
-  <header class="navbar-fixed">
+  <header >
+    <div class="navbar-fixed">
+    <!-- Dropdown Structure -->
+    <ul id="dropdown1" class="dropdown-content">
+      <li><a href="{% url 'index' %}">View all Courses</a></li>
+      <li class="divider"></li>
+      <li><a href="{% url 'courses_create' %}">Add a new course</a></li>
+    </ul>
+    <ul id="dropdown2" class="dropdown-content">
+      <li><a href="{% url 'students_index' %}">View All Students</a></li>
+      <li class="divider"></li>
+      <li><a href="{% url 'students_create' %}">Add a Student</a></li>
+    </ul>
     <nav class="teal">
       <div class="nav-wrapper">
-        <ul>
-          <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Course Tracker</a></li>
-        </ul>
-        <ul class="right">
-          <li><a href="{% url 'about' %}">About</a></li>
-          {% if user.is_authenticated %}
-            <li><a href="{% url 'students_index' %}">View All Students</a></li>
-            <li><a href="{% url 'students_create' %}">Add a Student</a></li>
-            <li><a href="{% url 'index' %}">View All Courses</a></li>
-            <li><a href="{% url 'courses_create' %}">Add a New Course</a></li>
-            <li><a href="{% url 'logout' %}">Log Out</a></li>
-          {% else %}
-            <li><a href="{% url 'signup' %}">Sign Up</a></li>  
-            <li><a href="{% url 'login' %}">Log In</a></li>
-          {% endif %}  
-        </ul>
+            <a href="/" class="brand-logo">&nbsp;&nbsp;Course Tracker</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="{% url 'about' %}">About</a></li>
+              {% if user.is_authenticated %}
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Courses<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Students<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a href="{% url 'logout' %}">Log Out</a></li>
+              {% else %}
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>  
+                <li><a href="{% url 'login' %}">Log In</a></li>
+              {% endif %} 
+            </ul>
       </div>
     </nav>
+  </div>
+    <ul class="sidenav" id="mobile-demo">
+      <li><a href="{% url 'about' %}">About</a></li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'students_index' %}">View All Students</a></li>
+        <li><a href="{% url 'students_create' %}">Add a Student</a></li>
+        <li><a href="{% url 'index' %}">View All Courses</a></li>
+        <li><a href="{% url 'courses_create' %}">Add a New Course</a></li>
+        <li><a href="{% url 'logout' %}">Log Out</a></li>
+      {% else %}
+        <li><a href="{% url 'signup' %}">Sign Up</a></li>  
+        <li><a href="{% url 'login' %}">Log In</a></li>
+      {% endif %}
+    </ul>
   </header>
   <main class="container">
     {% block content %}
@@ -45,6 +70,12 @@
     document.addEventListener('DOMContentLoaded', () => {
       const parallaxEffect = document.querySelectorAll('.parallax');
       M.Parallax.init(parallaxEffect, {});
+      var elems = document.querySelectorAll('.dropdown-trigger');
+      var instances = M.Dropdown.init(elems, options);
+    });
+    $(".dropdown-trigger").dropdown();
+    $(document).ready(function(){
+      $('.sidenav').sidenav();
     });
   </script>
 </body>
