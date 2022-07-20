@@ -5,8 +5,11 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Course, Student, Lesson, Homework
+from .forms import LessonForm, HomeworkForm
 from .models import Course, Student, Photo
 from .forms import LessonForm
+from datetime import date
 import uuid
 import boto3
 import os
@@ -95,6 +98,32 @@ class StudentUpdate(LoginRequiredMixin, UpdateView):
 class StudentDelete(LoginRequiredMixin, DeleteView):
     model = Student
     success_url = "/students/"
+
+
+@login_required
+def lessons_detail(request, pk):
+  lesson = Lesson.objects.get(id=pk)
+  homework_form = HomeworkForm()
+  return render(request, 'main_app/lesson_detail.html', {'lesson': lesson, 'homework_form': homework_form})
+  
+@login_required
+def add_homework(request, pk):
+  form = HomeworkForm(request.POST)
+  if form.is_valid():
+    new_homework = form.save(commit=False)
+    new_homework.lesson_id = pk
+    new_homework.assign_date = date.today()
+    new_homework.save()
+  return redirect('lessons_detail', pk=pk) 
+
+class LessonUpdate(LoginRequiredMixin, UpdateView):
+  model = Lesson
+  fields = ['title', 'unit', 'description']
+
+class LessonDelete(LoginRequiredMixin, DeleteView):
+  model = Lesson
+  success_url = '/courses/' 
+
 
 
 @login_required
