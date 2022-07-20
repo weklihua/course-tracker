@@ -74,4 +74,10 @@ class Lesson(models.Model):
 
     def __str__(self):
         return f"Unit {self.unit}: {self.title}"
-    
+
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for student_id: {self.student_id} @{self.url}"
