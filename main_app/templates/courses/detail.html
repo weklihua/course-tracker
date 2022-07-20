@@ -35,7 +35,8 @@
             <td>{{lesson.unit}}</td>
             <td>{{lesson.title}}</td>
             <td>{{lesson.description}}</td>
-          </tr>
+            <td><a href="{% url 'lessons_detail' lesson.id %}">View Lesson</a></td>
+          </tr>     
         {% endfor %}
       </tbody>
     </table>

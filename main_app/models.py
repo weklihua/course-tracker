@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from datetime import date
 
 # Create your models here.
 
@@ -74,4 +75,19 @@ class Lesson(models.Model):
 
     def __str__(self):
         return f"Unit {self.unit}: {self.title}"
+
+    def get_absolute_url(self):
+        return reverse('lessons_detail', kwargs={'pk': self.id})   
+
+class Homework(models.Model):
+    task = models.TextField(max_length = 250)
+    assign_date = models.DateField('Assign Date')
+    due_date = models.DateField("Due Date") 
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)   
+
+    class Meta:
+        ordering = ['due_date']
+
+    def __str__(self):
+        return f"{self.task}"     
     
