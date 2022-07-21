@@ -5,10 +5,8 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Course, Student, Lesson, Homework
+from .models import Course, Student, Lesson, Homework, Photo
 from .forms import LessonForm, HomeworkForm
-from .models import Course, Student, Photo
-from .forms import LessonForm
 from datetime import date
 import uuid
 import boto3
@@ -122,6 +120,10 @@ class LessonUpdate(LoginRequiredMixin, UpdateView):
 
 class LessonDelete(LoginRequiredMixin, DeleteView):
   model = Lesson
+  success_url = '/courses/' 
+
+class HomeworkDelete(LoginRequiredMixin, DeleteView):
+  model = Homework
   success_url = '/courses/' 
 
 
