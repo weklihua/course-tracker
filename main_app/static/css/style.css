@@ -22,10 +22,31 @@ body {
 }
 
 #studentdetail{
-  margin-left:15%;
-  width: 70%;
+  margin-left:20%;
+  width: 60%;
 }
+
 
 div.card.teal.lighten-5:hover {
   box-shadow: 2px 2px rgba(216, 212, 212, 0.603);
 }
+
+img.responsive-img.card-panel {
+  max-width:30%;
+  padding:0;
+  float:right;
+  overflow: hidden;
+  height:auto;
+  max-height: 70%;
+}
+
+div.card-panel.teal-text.center-align {
+  max-width:30%;
+  padding:5%;
+  float:right;
+  font-size: 90%;
+  overflow: auto;
+  max-height: 70%;
+
+}
+
