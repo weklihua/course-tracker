@@ -36,6 +36,7 @@
             <td>{{homework.task}}</td>
             <td>{{homework.assign_date}}</td>
             <td>{{homework.due_date}}</td>
+            <td><a href="{% url 'homework_delete' homework.id %}">Delete</a></td>
           </tr>     
         {% endfor %}
       </tbody>
