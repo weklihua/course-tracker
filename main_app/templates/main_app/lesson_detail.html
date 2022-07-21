@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-
 <h1>Lesson Details</h1>
-
 <div class="row">
   <div class="col s12 col-offset-3">
     <div class="card teal lighten-5" id="studentdetail">
@@ -18,6 +16,9 @@
     </div>
   </div>
   <div>
+    <a href="{% url 'detail' lesson.course.id %}" class="waves-effect waves-light btn">back</a>
+    <hr>
+    <h4>Homework</h4>
     <form action="{% url 'add_homework' lesson.id %}" method="POST">
       {% csrf_token %}
       <table>
