@@ -40,6 +40,7 @@ img.responsive-img.card-panel {
   overflow: auto;
   height:auto;
   max-height: 100%;
+  border-radius: 5%;
 }
 
 div.card-panel.teal-text.center-align {
@@ -49,5 +50,7 @@ div.card-panel.teal-text.center-align {
   font-size: 90%;
   overflow: auto;
   max-height: 70%;
+  border-radius: 5%;
+
 }
 
