@@ -125,6 +125,10 @@ LOGIN_REDIRECT_URL = '/courses/'
 
 LOGOUT_REDIRECT_URL = '/'
 
+import django_on_heroku
+django_on_heroku.settings(locals())
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
